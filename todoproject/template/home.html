@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>ToDo App</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+        <form method="POST" class="p-3 shadow ">
+             {% csrf_token %}
+            <div class="form-group">
+    <input type="text" class="form-control" name="task" placeholder="Type your task">
+
+</div>
+<div class="form-group">
+    <input type="text" class="form-control"  name="priority" placeholder="Priority">
+
+</div>
+            <div class="form-group">
+    <input type="date" class="form-control"  name="date" placeholder="Date">
+
+</div>
+<div class="form-group">
+   <input type="submit" class="btn btn-success" >
+
+</div>
+        </form>
+             {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-info">
+    <strong>{{message}}</strong>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+<!--             {% if messages %}-->
+<!--        {% for message in messages %}-->
+<!--         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}-->
+
+<!--        {% endfor %}-->
+
+<!--    {% endif %}-->
+
+<!--{% for i in tasks %}-->
+<!--{{i.name}}-->
+<!--{{i.priority}}<br>-->
+
+<!--{% endfor %}-->
+    </div>
+        <div class="col-md-6" >
+           <center> <h4>Task to be completed</h4></center><br>
+
+            {% for i in tasks %}
+          <div class="shadow card" >
+           <div class="card-body">
+               <h5 class="card-title">{{i.name}}</h5>
+               <p><b>{{i.priority}}</b></p>
+               <p>{{i.date}}</p>
+               <a class="btn btn-danger" href="{% url 'delete' i.id %}">Complete</a>
+               <a class="btn btn-primary" href="{% url 'update' i.id %}">Edit</a>
+
+           </div>
+          </div>
+            <br>
+            {% endfor %}
+        </div>
+</div>
+    </div>
+{% endblock %}
+
+
+
+
+<!--<br><br>-->
+
+<!--<form method="POST">-->
+<!--&lt;!&ndash;    {% csrf_token %}<center>&ndash;&gt;-->
+<!--&lt;!&ndash;    <br>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" name="task" placeholder="Type your task">&ndash;&gt;-->
+<!--&lt;!&ndash;   <br><br> <input type="text" name="priority" placeholder="Priority">&ndash;&gt;-->
+<!--&lt;!&ndash;  <br> <br> <input type="submit"></center>&ndash;&gt;-->
+<!--</form>-->
+
